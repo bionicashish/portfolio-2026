@@ -28,7 +28,7 @@
 
 .nav-link {
   color: var(--charcoal);
-  letter-spacing: .02px;
+  letter-spacing: 0.02px;
   font-size: 20px;
   line-height: 100%;
   text-decoration: none;
@@ -59,7 +59,7 @@
 
 .h1 {
   color: var(--primary-orange);
-  letter-spacing: .01em;
+  letter-spacing: 0.01em;
   margin-top: 0;
   margin-bottom: 0;
   font-size: clamp(72px, 19.7vw, 284px);
@@ -73,7 +73,7 @@
 
 .body-22px {
   color: #1b1b1b;
-  letter-spacing: .01em;
+  letter-spacing: 0.01em;
   font-size: 22px;
   line-height: 120%;
 }
@@ -98,7 +98,9 @@
 .polaroid {
   background-color: #fff;
   padding: 20px;
-  box-shadow: 0 1px 2px #00000012, 0 0 0 3px #e7e7e7;
+  box-shadow:
+    0 1px 2px #00000012,
+    0 0 0 3px #e7e7e7;
 }
 
 .image-wrapper {
@@ -117,7 +119,7 @@
 .h-2 {
   color: var(--primary-orange);
   text-align: center;
-  letter-spacing: .01em;
+  letter-spacing: 0.01em;
   font-size: 80px;
   line-height: 90%;
 }
@@ -129,13 +131,13 @@
 .body-18px.text-fade {
   color: #1b1b1bcc;
   text-align: center;
-  letter-spacing: .01em;
+  letter-spacing: 0.01em;
   font-size: 18px;
   line-height: 130%;
 }
 
 .opacity-80 {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .mw-320 {
@@ -166,7 +168,7 @@
 .pixelated-button {
   background-color: var(--primary-orange);
   color: #180b04;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
@@ -311,7 +313,7 @@
 }
 
 .opacity-40 {
-  opacity: .4;
+  opacity: 0.4;
 }
 
 .div-block-6 {
@@ -407,6 +409,10 @@
     margin-bottom: 64px;
   }
 
+  .email-text {
+    font-size: 16px;
+  }
+
   .footer-section {
     padding-left: 16px;
     padding-right: 16px;
@@ -416,5 +422,3 @@
     margin-top: 10%;
   }
 }
-
-
