@@ -442,11 +442,13 @@ h2,
 h3 {
   font-family: "8", sans-serif;
   font-weight: 900;
+  font-style: normal;
 }
 
 .footer-text {
   font-family: "8", sans-serif;
   font-weight: 900;
+  font-style: normal;
   color: #1b1b1b;
   /* Fluid type */
   font-size: clamp(80px, 17vw, 240px);
