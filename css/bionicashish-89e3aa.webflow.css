@@ -441,12 +441,12 @@ h1,
 h2,
 h3 {
   font-family: "8", sans-serif;
-  font-weight: 600;
+  font-weight: 900;
 }
 
 .footer-text {
   font-family: "8", sans-serif;
-  font-weight: 600;
+  font-weight: 900;
   color: #1b1b1b;
   /* Fluid type */
   font-size: clamp(80px, 17vw, 240px);
@@ -517,7 +517,6 @@ h3 {
   );
   pointer-events: none;
 }
-
 
 /* Hover → lift + slightly more rotation */
 .phone-screen:hover {
