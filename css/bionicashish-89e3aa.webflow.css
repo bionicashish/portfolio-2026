@@ -258,6 +258,7 @@
   justify-content: flex-start;
   align-items: center;
   height: 75vh;
+  max-height: 675px;
   padding: 48px 32px 24px;
   display: flex;
   position: relative;
@@ -426,6 +427,7 @@
   .footer-section {
     padding-left: 16px;
     padding-right: 16px;
+    max-height: unset;
   }
 
   .phone-screen {
