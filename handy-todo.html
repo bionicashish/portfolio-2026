@@ -67,14 +67,14 @@
 
       .bottom-section {
         position: fixed;
-        bottom: 80px;
+        bottom: 32px;
         left: 50%;
         transform: translateX(-50%);
         z-index: 20;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 44px;
+        gap: 32px;
         width: 100%;
         max-width: 400px;
         padding: 0 24px;
@@ -96,7 +96,7 @@
         flex-direction: column;
         gap: 12px;
         overflow: hidden;
-        margin-top: -40px;
+        margin-top: -72px;
       }
 
       /* Todo Item */
@@ -207,8 +207,76 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 8px;
+        gap: 40px;
         width: 100%;
+      }
+
+      .helper-command {
+        width: 100%;
+        max-width: 604px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .helper-command-label {
+        font-size: 12px;
+        font-weight: 400;
+        font-variation-settings:
+          "GRAD" 100,
+          "ROND" 100;
+        color: rgba(27, 27, 27, 0.56);
+        line-height: 1.15;
+        text-align: center;
+      }
+
+      .helper-command-box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 8px 8px 8px 16px;
+        background: #f2f2f2;
+        border-radius: 999px;
+      }
+
+      .helper-command-text {
+        flex: 1;
+        min-width: 0;
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.15;
+        color: #1b1b1b;
+        letter-spacing: -0.03em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .copy-btn {
+        flex-shrink: 0;
+        width: 80px;
+        min-width: 80px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 999px;
+        background: #1b1b1b;
+        color: #ffffff;
+        cursor: pointer;
+        font-family: "Google Sans Flex", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        font-variation-settings:
+          "GRAD" 100,
+          "ROND" 100;
+        line-height: 1;
+        transition:
+          transform 0.15s ease,
+          opacity 0.15s ease;
       }
 
       .btn {
@@ -235,6 +303,10 @@
         transform: scale(0.97);
       }
 
+      .copy-btn:active {
+        transform: scale(0.97);
+      }
+
       .btn-primary {
         background-color: #1b1b1b;
         color: #ffffff;
@@ -249,14 +321,14 @@
           width: 100%;
           height: auto;
           max-height: 60vh;
-          margin-top: 24px;
+          margin-top: 0;
           border-radius: 20px;
         }
 
         .bottom-section {
-          bottom: 48px;
+          bottom: 32px;
           padding: 0 16px;
-          gap: 20px;
+          gap: 32px;
         }
 
         .heading {
@@ -272,6 +344,36 @@
           padding: 14px 24px;
         }
 
+        .helper-command {
+          gap: 8px;
+        }
+
+        .helper-command-label {
+          font-size: 12px;
+          max-width: 320px;
+        }
+
+        .helper-command-box {
+          flex-direction: column;
+          align-items: stretch;
+          border-radius: 28px;
+          gap: 20px;
+          padding: 8px 8px 8px 16px;
+        }
+
+        .helper-command-text {
+          white-space: normal;
+          overflow-wrap: anywhere;
+          text-align: left;
+        }
+
+        .copy-btn {
+          width: 100%;
+          min-width: 80px;
+          font-size: 16px;
+          padding: 8px 12px;
+        }
+
         .gradient-fade {
           height: 15vh;
           bottom: 35vh;
@@ -281,7 +383,6 @@
           height: 35vh;
         }
       }
-
     </style>
   </head>
   <body>
@@ -376,12 +477,43 @@
           class="btn btn-primary"
           >view on github</a
         >
+        <div class="helper-command">
+          <div class="helper-command-label">
+            if macOS says "app is damaged" run this command
+          </div>
+          <div class="helper-command-box">
+            <div class="helper-command-text" id="helper-command-text">
+              xattr -dr com.apple.quarantine /Applications/HandyToDo.app
+            </div>
+            <button class="copy-btn" type="button" onclick="copyCommand(this)">
+              copy
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
     <script>
       function toggleTodo(item) {
         item.classList.toggle("checked");
+      }
+
+      async function copyCommand(button) {
+        const command = document
+          .getElementById("helper-command-text")
+          .textContent.trim();
+        const originalText = button.textContent;
+
+        try {
+          await navigator.clipboard.writeText(command);
+          button.textContent = "copied";
+        } catch (error) {
+          button.textContent = "failed";
+        }
+
+        window.setTimeout(() => {
+          button.textContent = originalText;
+        }, 1600);
       }
     </script>
   </body>
