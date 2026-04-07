@@ -1,0 +1,396 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Handy Todo</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:GRAD,ROND,wght@100,100,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #ffffff;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: "Google Sans Flex", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        position: relative;
+      }
+
+      .gradient-fade {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 40vh;
+        height: 20vh;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          #ffffff 100%
+        );
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      .gradient-solid {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 40vh;
+        background: #ffffff;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        width: 100%;
+        max-width: 400px;
+        padding: 0 24px;
+        position: relative;
+      }
+
+      .bottom-section {
+        position: fixed;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 44px;
+        width: 100%;
+        max-width: 400px;
+        padding: 0 24px;
+      }
+
+      /* Todo Card */
+      .todo-card {
+        width: 400px;
+        height: 520px;
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow:
+          0 0 0 1px rgba(0, 0, 0, 0.07),
+          0 12px 30px rgba(0, 0, 0, 0.21);
+        padding: 32px 24px;
+        position: relative;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow: hidden;
+        margin-top: -40px;
+      }
+
+      /* Todo Item */
+      .todo-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      /* Checkbox Wrapper */
+      .checkbox-wrapper {
+        padding: 7px 0;
+        flex-shrink: 0;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      /* Checkbox */
+      .checkbox {
+        width: 16px;
+        height: 16px;
+        border-radius: 5px;
+        border: 0.5px solid rgba(27, 27, 27, 0.3);
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease;
+      }
+
+      .checkbox img {
+        width: 10px;
+        height: 10px;
+        display: none;
+      }
+
+      .todo-item.checked .checkbox {
+        background-color: #387dff;
+        border: none;
+      }
+
+      .todo-item.checked .checkbox img {
+        display: block;
+      }
+
+      /* Text Wrapper */
+      .text-wrapper {
+        padding: 6px 0;
+      }
+
+      /* Text */
+      .text {
+        font-family: "Google Sans Flex", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+        font-variation-settings:
+          "slnt" 0,
+          "wdth" 100,
+          "GRAD" 0,
+          "ROND" 100;
+        font-size: 14px;
+        color: #1b1b1b;
+        line-height: 18px;
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .todo-item.checked .text {
+        color: #a4a4a4;
+        text-decoration: line-through;
+        text-decoration-color: #a4a4a4;
+      }
+
+      /* Heading */
+      .heading {
+        font-family: "Google Sans Flex", sans-serif;
+        font-size: 56px;
+        font-variation-settings:
+          "GRAD" 100,
+          "ROND" 100;
+        font-weight: 600;
+        color: #1b1b1b;
+        line-height: 100%;
+        text-align: center;
+      }
+
+      /* Subtitle */
+      .subtitle {
+        font-family: "Google Sans Flex", sans-serif;
+        font-size: 18px;
+        font-variation-settings:
+          "GRAD" 100,
+          "ROND" 100;
+        font-weight: 400;
+        color: rgba(27, 27, 27, 0.4);
+        line-height: 140%;
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      /* Buttons */
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 220px;
+        padding: 16px 32px;
+        border-radius: 999px;
+        border: none;
+        cursor: pointer;
+        font-family: "Google Sans Flex", sans-serif;
+        font-size: 18px;
+        font-variation-settings:
+          "GRAD" 100,
+          "ROND" 100;
+        font-weight: 500;
+        line-height: 100%;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        transition: opacity 0.15s ease;
+      }
+
+      .btn:active {
+        transform: scale(0.97);
+      }
+
+      .btn-primary {
+        background-color: #1b1b1b;
+        color: #ffffff;
+      }
+
+      @media screen and (max-width: 480px) {
+        .wrapper {
+          padding: 0 16px;
+        }
+
+        .todo-card {
+          width: 100%;
+          height: auto;
+          max-height: 60vh;
+          margin-top: 24px;
+          border-radius: 20px;
+        }
+
+        .bottom-section {
+          bottom: 48px;
+          padding: 0 16px;
+          gap: 20px;
+        }
+
+        .heading {
+          font-size: 40px;
+        }
+
+        .subtitle {
+          font-size: 15px;
+        }
+
+        .btn {
+          font-size: 16px;
+          padding: 14px 24px;
+        }
+
+        .gradient-fade {
+          height: 15vh;
+          bottom: 35vh;
+        }
+
+        .gradient-solid {
+          height: 35vh;
+        }
+      }
+
+      .btn-secondary {
+        background-color: #dddddd;
+        color: #1b1b1b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gradient-fade"></div>
+    <div class="gradient-solid"></div>
+    <div class="wrapper">
+      <!-- Todo Card -->
+      <div class="todo-card">
+        <div class="todo-item checked" onclick="toggleTodo(this)">
+          <div class="checkbox-wrapper">
+            <div class="checkbox"><img src="handy-check.svg" alt="" /></div>
+          </div>
+          <div class="text-wrapper">
+            <span class="text">build cms architecture for pseo setup</span>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="checkbox-wrapper">
+            <div class="checkbox"><img src="handy-check.svg" alt="" /></div>
+          </div>
+          <div class="text-wrapper">
+            <span class="text"
+              >design testimonial card appear animation on home page</span
+            >
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="checkbox-wrapper">
+            <div class="checkbox"><img src="handy-check.svg" alt="" /></div>
+          </div>
+          <div class="text-wrapper">
+            <span class="text"
+              >add clamp values on headings, and subtitles</span
+            >
+          </div>
+        </div>
+        <div class="todo-item checked" onclick="toggleTodo(this)">
+          <div class="checkbox-wrapper">
+            <div class="checkbox"><img src="handy-check.svg" alt="" /></div>
+          </div>
+          <div class="text-wrapper">
+            <span class="text"
+              >about hero animation // suggest to have a static or simpler
+              version on smaller screens</span
+            >
+          </div>
+        </div>
+        <div class="todo-item checked" onclick="toggleTodo(this)">
+          <div class="checkbox-wrapper">
+            <div class="checkbox"><img src="handy-check.svg" alt="" /></div>
+          </div>
+          <div class="text-wrapper">
+            <span class="text">fix nav-link hover states</span>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="checkbox-wrapper">
+            <div class="checkbox"><img src="handy-check.svg" alt="" /></div>
+          </div>
+          <div class="text-wrapper">
+            <span class="text"
+              >add text svgs - v imp (wrap word in span, and add svg)</span
+            >
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="checkbox-wrapper">
+            <div class="checkbox"><img src="handy-check.svg" alt="" /></div>
+          </div>
+          <div class="text-wrapper">
+            <span class="text">nav-bar - ask fro dropdown design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <!-- Heading & Subtitle -->
+      <div class="heading-section">
+        <div class="heading">handy todo</div>
+        <div class="subtitle">
+          simple todo sheet that sits on<br />your mac toolbar
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="buttons">
+        <a
+          href="https://github.com/bionicashish/handy-todo/releases/latest/download/HandyToDo.zip"
+          class="btn btn-primary"
+          >download for mac</a
+        >
+        <a
+          href="https://github.com/bionicashish/handy-todo"
+          target="_blank"
+          class="btn btn-secondary"
+          >view on github</a
+        >
+      </div>
+    </div>
+
+    <script>
+      function toggleTodo(item) {
+        item.classList.toggle("checked");
+      }
+    </script>
+  </body>
+</html>
