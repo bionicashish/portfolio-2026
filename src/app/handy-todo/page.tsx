@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { HandyTodoPage } from "@/components/HandyTodoPage";
 import handyOgImg from "@/assets/handy-og-img.png";
-import favicon from "@/assets/favicon-32x32.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://bionicashish.com"),
@@ -26,9 +25,6 @@ export const metadata: Metadata = {
     title: "Handy Todo",
     description: "Simple todo sheet that sits on your Mac toolbar.",
     images: [handyOgImg.src],
-  },
-  icons: {
-    icon: favicon.src,
   },
 };
 
