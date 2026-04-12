@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/handy-todo", "destination": "/handy-todo.html" }
-  ]
-}

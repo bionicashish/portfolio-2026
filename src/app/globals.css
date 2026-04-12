@@ -1,0 +1,53 @@
+@import url("https://use.typekit.net/rfw2rlk.css");
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:GRAD,ROND,wght@100,100,600&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1b1b1b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-heading: "eight-semi-condensed", sans-serif;
+  --font-body: "pacaembu", sans-serif;
+  --font-pixel: "Pixelify Sans", sans-serif;
+}
+
+@layer components {
+  .heading {
+    @apply font-heading font-black tracking-[0.01em] leading-[0.9] text-[#FF7F35];
+  }
+
+  .heading-h1 {
+    font-size: clamp(7.5rem, 19.72vw, 17.75rem);
+  }
+
+  .heading-h2 {
+    @apply text-[80px];
+  }
+
+  .footer-heading {
+    font-family: "eight-semi-condensed", sans-serif;
+    font-weight: 900;
+    font-size: clamp(5rem, 16.74vw, 15rem);
+    line-height: 90%;
+    color: #1b1b1b;
+  }
+
+  .nav-link {
+    @apply font-body font-medium text-xl tracking-[0.01em] text-[#1b1b1b];
+  }
+
+  .wrapper {
+    @apply w-full max-w-[1320px] mx-auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}

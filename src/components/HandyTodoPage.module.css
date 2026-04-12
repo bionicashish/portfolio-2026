@@ -1,0 +1,362 @@
+.page {
+  background-color: #ffffff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Google Sans Flex", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow: hidden;
+}
+
+.page * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.gradientFade {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 40vh;
+  height: 20vh;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.gradientSolid {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40vh;
+  background: #ffffff;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 24px;
+  position: relative;
+}
+
+.bottomSection {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 24px;
+}
+
+.todoCard {
+  width: 400px;
+  height: 520px;
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.07),
+    0 12px 30px rgba(0, 0, 0, 0.21);
+  padding: 32px 24px;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  overflow: hidden;
+  margin-top: -72px;
+}
+
+.todoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkboxWrapper {
+  padding: 7px 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  border: 0.5px solid rgba(27, 27, 27, 0.3);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.checkbox img {
+  width: 10px;
+  height: 10px;
+  display: none;
+}
+
+.checked .checkbox {
+  background-color: #387dff;
+  border: none;
+}
+
+.checked .checkbox img {
+  display: block;
+}
+
+.textWrapper {
+  padding: 6px 0;
+}
+
+.text {
+  font-family: "Google Sans Flex", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "wdth" 100,
+    "GRAD" 0,
+    "ROND" 100;
+  font-size: 14px;
+  color: #1b1b1b;
+  line-height: 18px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.checked .text {
+  color: #a4a4a4;
+  text-decoration: line-through;
+  text-decoration-color: #a4a4a4;
+}
+
+.heading {
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: 56px;
+  font-variation-settings:
+    "GRAD" 100,
+    "ROND" 100;
+  font-weight: 600;
+  color: #1b1b1b;
+  line-height: 100%;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: 18px;
+  font-variation-settings:
+    "GRAD" 100,
+    "ROND" 100;
+  font-weight: 600;
+  color: rgba(27, 27, 27, 0.4);
+  line-height: 140%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.helperCommand {
+  width: 100%;
+  max-width: 604px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.helperCommandLabel {
+  font-size: 12px;
+  font-weight: 600;
+  font-variation-settings:
+    "GRAD" 100,
+    "ROND" 100;
+  color: rgba(27, 27, 27, 0.56);
+  line-height: 1.15;
+  text-align: center;
+}
+
+.helperCommandBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 8px 8px 16px;
+  background: #f2f2f2;
+  border-radius: 999px;
+}
+
+.helperCommandText {
+  flex: 1;
+  min-width: 0;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: #1b1b1b;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copyBtn {
+  flex-shrink: 0;
+  width: 80px;
+  min-width: 80px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 999px;
+  background: #1b1b1b;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-variation-settings:
+    "GRAD" 100,
+    "ROND" 100;
+  line-height: 1;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.btn {
+  width: 100%;
+  max-width: 220px;
+  padding: 16px 32px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-family: "Google Sans Flex", sans-serif;
+  font-size: 18px;
+  font-variation-settings:
+    "GRAD" 100,
+    "ROND" 100;
+  font-weight: 500;
+  line-height: 100%;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.copyBtn:active {
+  transform: scale(0.97);
+}
+
+.btnPrimary {
+  background-color: #1b1b1b;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 480px) {
+  .wrapper {
+    padding: 0 16px;
+  }
+
+  .todoCard {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    margin-top: 0;
+    border-radius: 20px;
+  }
+
+  .bottomSection {
+    bottom: 32px;
+    padding: 0 16px;
+    gap: 32px;
+  }
+
+  .heading {
+    font-size: 40px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 14px 24px;
+  }
+
+  .helperCommand {
+    gap: 8px;
+  }
+
+  .helperCommandLabel {
+    font-size: 12px;
+    max-width: 320px;
+  }
+
+  .helperCommandBox {
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 28px;
+    gap: 20px;
+    padding: 8px 8px 8px 16px;
+  }
+
+  .helperCommandText {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
+  .copyBtn {
+    width: 100%;
+    min-width: 80px;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+
+  .gradientFade {
+    height: 15vh;
+    bottom: 35vh;
+  }
+
+  .gradientSolid {
+    height: 35vh;
+  }
+}
