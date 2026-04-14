@@ -42,7 +42,7 @@
   }
 
   .wrapper {
-    @apply w-full max-w-[1320px] mx-auto;
+    @apply w-full max-w-[1320px] px-10 mx-auto;
   }
 }
 
